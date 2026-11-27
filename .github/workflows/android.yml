@@ -26,18 +26,25 @@ jobs:
 
       - name: Extract Android project
         run: |
-          ZIP_FILE="./AviatorProCompanion(1).zip"
+          ZIP_FILE=$(find . -type f -name 'AviatorProCompanion(1).zip' -print -quit)
+
           if [ -z "$ZIP_FILE" ]; then
-            echo "Project ZIP not found"
+            echo "Project ZIP not found in repository"
+            find . -type f
             exit 1
           fi
+
+          echo "Found project: $ZIP_FILE"
           mkdir extracted
           unzip -q "$ZIP_FILE" -d extracted
+
           GRADLEW=$(find extracted -type f -name gradlew | head -n 1)
+
           if [ -z "$GRADLEW" ]; then
             echo "Gradle wrapper not found"
             exit 1
           fi
+
           chmod +x "$GRADLEW"
           echo "PROJECT_DIR=$(dirname "$GRADLEW")" >> "$GITHUB_ENV"
 
