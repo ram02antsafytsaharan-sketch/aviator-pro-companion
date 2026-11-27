@@ -26,7 +26,7 @@ jobs:
 
       - name: Extract Android project
         run: |
-          ZIP_FILE=$(find . -type f -name 'AviatorProCompanion (1).zip' -print -quit)
+          ZIP_FILE=$(find . -type f -name 'AviatorProCompanion (2).zip' -print -quit)
 
           if [ -z "$ZIP_FILE" ]; then
             echo "Project ZIP not found in repository"
